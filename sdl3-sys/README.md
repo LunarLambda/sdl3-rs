@@ -3,7 +3,7 @@
 Heavily WIP bindings for SDL 3.0, which in itself is currently WIP.
 
 - Requires CMake and Ninja for compiling SDL.
-- Shared linking only (for now)
+- Static linking only tested on Linux
 - Compilation only tested on x86\_64 Linux and Windows (for now)
 
 ### Why Not \<other crate\>?

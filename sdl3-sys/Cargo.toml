@@ -9,8 +9,12 @@ links = "SDL3"
 [lib]
 doctest = false
 
+[features]
+static = []
+
 [dependencies]
 
 [build-dependencies]
 bindgen = "0.66.1"
+cfg-if = "1.0.0"
 cmake = "0.1.50"
