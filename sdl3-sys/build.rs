@@ -1,8 +1,10 @@
-const LIB: &str = "SDL3";
+// What the hell, bindgen?
+#[cfg(windows)]
+const REGEX: &str = r#"(.*[/\\])?sdl[/\\]include[/\\]SDL3[/\\].*"#;
+#[cfg(not(windows))]
+const REGEX: &str = r#"(.*/)?sdl/include/SDL3/.*"#;
 
-const TOP: &str = "#![allow(non_camel_case_types)]
-#![allow(non_upper_case_globals)]
-#![allow(non_snake_case)]";
+const LIB: &str = "SDL3";
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
@@ -16,13 +18,12 @@ fn main() {
     println!("cargo:rustc-link-lib={}", LIB);
 
     let _bindgen = bindgen::builder()
-        .allowlist_file("sdl/include/SDL3/.*")
+        .allowlist_file(REGEX)
         .clang_arg("-Isdl/include")
         .header("sdl/include/SDL3/SDL.h")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
-        .raw_line(TOP)
         .generate()
         .unwrap()
-        .write_to_file("src/lib.rs")
+        .write_to_file("src/bindings.rs")
         .unwrap();
 }
