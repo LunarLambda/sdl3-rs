@@ -5,7 +5,6 @@ fn main() {
     run_bindgen();
 }
 
-
 fn cmake_build() {
     let dst = cmake::Config::new("sdl")
         .define("SDL_DISABLE_INSTALL_DOCS", "ON")
@@ -35,16 +34,9 @@ fn run_bindgen() {
         .blocklist_function("SDL_LogMessageV")
         .blocklist_function(r#"SDL_v\w+(scanf|printf)"#)
         .prepend_enum_name(false)
+        .sort_semantically(true)
         .clang_arg("-Isdl/include")
-        // Bindgen chokes on _Float16 _Complex definitions in clang's intrinsics headers.
-        // Disable them via preprocessor.
-        .clang_arg("-D__AVX512FP16INTRIN_H")
-        .clang_arg("-D__AVX512VLFP16INTRIN_H")
-        // SDL.h includes everything we want except syswm and vulkan. The rest are expositional
-        // headers and bundled OpenGL stuff we don't care about.
-        .header("sdl/include/SDL3/SDL.h")
-        .header("sdl/include/SDL3/SDL_syswm.h")
-        .header("sdl/include/SDL3/SDL_vulkan.h")
+        .header("wrapper.h")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         .generate()
         .unwrap()
