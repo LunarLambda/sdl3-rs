@@ -30,7 +30,10 @@ fn run_bindgen() {
         // build failures.
         .generate_comments(false)
         .generate_cstr(true)
-        .opaque_type("va_list")
+        // drop the va_list stuff because it's not useful
+        .blocklist_type(".*va_list")
+        .blocklist_function("SDL_LogMessageV")
+        .blocklist_function(r#"SDL_v\w+(scanf|printf)"#)
         .prepend_enum_name(false)
         .clang_arg("-Isdl/include")
         // Bindgen chokes on _Float16 _Complex definitions in clang's intrinsics headers.
