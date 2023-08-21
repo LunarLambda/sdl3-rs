@@ -4,17 +4,11 @@ version = "0.1.0"
 edition = "2021"
 links = "SDL3"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[lib]
-doctest = false
-
 [features]
-static = []
-
-[dependencies]
+bundled = []
 
 [build-dependencies]
 bindgen = "0.66.1"
 cfg-if = "1.0.0"
 cmake = "0.1.50"
+pkg-config = "0.3.27"
