@@ -10,7 +10,7 @@ fn cmake_build() {
     let dst = cmake::Config::new("sdl")
         .define("SDL_DISABLE_INSTALL_DOCS", "ON")
         .define("SDL_TEST_LIBRARY", "OFF")
-        .generator("Ninja")
+        //.generator("Ninja") // CMAKE_GENERATOR environment variable
         .build();
 
     println!("cargo:rustc-link-search=native={}", dst.join("lib").display());
