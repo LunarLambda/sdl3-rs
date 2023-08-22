@@ -14,4 +14,8 @@ variable.
 
 See [the bindgen documentation][bindgen-doc] for more information.
 
+## License
+
+sdl3-bindgen and SDL3 are licensed under the Zlib license.
+
 [bindgen-doc]: https://docs.rs/bindgen/0.66.1/bindgen/struct.Builder.html#clang-arguments
