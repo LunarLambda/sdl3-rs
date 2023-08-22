@@ -18,20 +18,20 @@ fn main() {
     // forward declaration used in SDL_main.h, not applicable to rust
     .blocklist_function("SDL_main")
 
-    // SDL's doc comments are inconsistent and don't translate to
+    // SDL's documentation comments are inconsistent and don't translate to
     // rustdoc very well, causing warnings and build failures due to
-    // being misinterpreted as doctests. Use the official wiki instead.
+    // being misinterpreted as doctests. best to use the official wiki instead
     .generate_comments(false)
 
-    // Used mostly for the hints API.
-    // More semantically correct and saves some typecasting.
+    // used mostly for the hints API
+    // more semantically correct and saves some typecasting
     .generate_cstr(true)
 
     // SDL's enum naming is fairly good, so prepending the enum name just
-    // causes the identifiers to be way longer than they need to be.
+    // causes the identifiers to be longer than they need to be
     .prepend_enum_name(false)
 
-    // Cleanliness and a vague attempt at generating diffable files.
+    // more orderly and may generate more diffable files
     .sort_semantically(true)
 
     .clang_arg("-Iheaders")
