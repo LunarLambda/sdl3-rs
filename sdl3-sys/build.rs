@@ -1,6 +1,10 @@
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
 
+    if cfg!(feature = "check") {
+        return;
+    }
+
     if cfg!(feature = "bundled") {
         cmake_build();
     } else {

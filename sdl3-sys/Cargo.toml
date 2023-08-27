@@ -6,6 +6,7 @@ links = "SDL3"
 
 [features]
 bundled = []
+check = []
 
 [dependencies]
 cfg-if = "1.0.0"

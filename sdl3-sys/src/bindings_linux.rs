@@ -183,6 +183,12 @@ pub type VkInstance = *mut VkInstance_T;
 pub type VkSurfaceKHR = *mut VkSurfaceKHR_T;
 pub type SDL_vulkanInstance = VkInstance;
 pub type SDL_vulkanSurface = VkSurfaceKHR;
+pub type SDL_main_func = ::std::option::Option<
+    unsafe extern "C" fn(
+        argc: ::std::os::raw::c_int,
+        argv: *mut *mut ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int,
+>;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct SDL_iconv_data_t {
@@ -1535,7 +1541,6 @@ pub const SDL_PRIX32: &::std::ffi::CStr =
 pub const SDL_PI_D: f64 = 3.141592653589793;
 pub const SDL_PI_F: f64 = 3.141592653589793;
 pub const SDL_ASSERT_LEVEL: u32 = 2;
-pub const SDL_NULL_WHILE_LOOP_CONDITION: u32 = 0;
 pub const SDL_LIL_ENDIAN: u32 = 1234;
 pub const SDL_BIG_ENDIAN: u32 = 4321;
 pub const SDL_BYTEORDER: u32 = 1234;
@@ -16976,4 +16981,15 @@ extern "C" {
         instance: VkInstance,
         surface: *mut VkSurfaceKHR,
     ) -> SDL_bool;
+}
+extern "C" {
+    pub fn SDL_SetMainReady();
+}
+extern "C" {
+    pub fn SDL_RunApp(
+        argc: ::std::os::raw::c_int,
+        argv: *mut *mut ::std::os::raw::c_char,
+        mainFunction: SDL_main_func,
+        reserved: *mut ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
 }
