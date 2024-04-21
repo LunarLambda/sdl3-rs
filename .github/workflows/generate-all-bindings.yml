@@ -1,7 +1,11 @@
-name: on-push-bindgen
+name: generate-all-bindings
 run-name: Generate all bindings
+
 on:
-  - push
+  push:
+    paths:
+      - sdl3-bindgen/**
+  workflow_call:
 
 jobs:
   generate-bindings-x86_64-unknown-linux-gnu:

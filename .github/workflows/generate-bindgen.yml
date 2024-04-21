@@ -1,5 +1,6 @@
 name: generate-bindgen
 run-name: Generate bindgen (${{ inputs.target }})
+
 on:
   workflow_call:
     inputs:
