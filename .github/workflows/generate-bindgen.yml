@@ -1,0 +1,26 @@
+name: generate-bindgen
+run-name: Generate bindgen (${{ inputs.target }})
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      target:
+        required: true
+        type: string    
+
+jobs:
+  generate-bindgen:
+    runs-on: ${{ inputs.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup target add ${{ inputs.target }}
+      - run: rustup update
+      - run: bash -c "cd ./sdl3-bindgen && ./run-ga.sh ${{ inputs.target }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bindings_${{ inputs.target }}.rs
+          path: ./sdl3-bindgen/bindings_${{ inputs.target }}.rs
+          if-no-files-found: error

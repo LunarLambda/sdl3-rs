@@ -1,0 +1,35 @@
+name: push-bindings-to-branch
+run-name: Push bindings to branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to push the bindings to:"
+        required: true
+
+jobs:
+  generate-all:
+    uses: ./.github/workflows/generate-all-bindings.yml
+
+  push-to-branch:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    needs: generate-all
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - uses: actions/download-artifact@v4
+        with:
+          path: "./sdl3-sys/src/generated/"
+      - name: Push generated artificats to input branch
+        env: 
+          CI_COMMIT_MESSAGE: "chore(bindings): Generate bindings with GitHub Actions"
+          CI_COMMIT_AUTHOR: github-actions[bot]
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}@users.noreply.github.com"
+          git add --all
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}" && git push || true
