@@ -1,5 +1,5 @@
 [workspace]
-members = ["sdl3-bindgen"]
+members = ["sdl3-bindgen", "sdl3-test"]
 
 [package]
 name = "sdl3"
