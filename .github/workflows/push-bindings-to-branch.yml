@@ -23,9 +23,10 @@ jobs:
           ref: ${{ inputs.branch }}
       - uses: actions/download-artifact@v4
         with:
-          path: "./sdl3-sys/src/generated/"
+          path: "./sdl3-sys/src/bindings/"
+          merge-multiple: true
       - name: Push generated artificats to input branch
-        env: 
+        env:
           CI_COMMIT_MESSAGE: "chore(bindings): Generate bindings with GitHub Actions"
           CI_COMMIT_AUTHOR: github-actions[bot]
         run: |
