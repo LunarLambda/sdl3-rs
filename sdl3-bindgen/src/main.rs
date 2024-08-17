@@ -16,6 +16,7 @@ fn main() {
     .blocklist_type(".*va_list.*")
     .blocklist_function("SDL_LogMessageV")
     .blocklist_function(r#"SDL_v\w+(scanf|printf)"#)
+    .blocklist_function("SDL_IOvprintf")
 
     // forward declaration used in SDL_main.h, not applicable to rust
     .blocklist_function("SDL_main")
