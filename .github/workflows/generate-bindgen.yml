@@ -9,7 +9,7 @@ on:
         type: string
       target:
         required: true
-        type: string    
+        type: string
 
 jobs:
   generate-bindgen:
@@ -21,6 +21,6 @@ jobs:
       - run: bash -c "cd ./sdl3-bindgen && ./run-ga.sh ${{ inputs.target }}"
       - uses: actions/upload-artifact@v4
         with:
-          name: bindings_${{ inputs.target }}.rs
-          path: ./sdl3-bindgen/bindings_${{ inputs.target }}.rs
+          name: ${{ inputs.target }}.rs
+          path: ./sdl3-bindgen/${{ inputs.target }}.rs
           if-no-files-found: error
