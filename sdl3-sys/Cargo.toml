@@ -8,9 +8,6 @@ links = "SDL3"
 bundled = []
 check = []
 
-[dependencies]
-cfg-if = "1.0.0"
-
 [build-dependencies]
 cmake = "0.1.50"
 pkg-config = "0.3.27"
