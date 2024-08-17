@@ -5,10 +5,9 @@
 #define __AVX512FP16INTRIN_H
 #define __AVX512VLFP16INTRIN_H
 
-// SDL.h includes pretty much everything we want, except syswm and vulkan
+// SDL.h includes pretty much everything we want, except vulkan
 // The rest are expositional headers and bundled OpenGL headers that we don't care about.
 #include <SDL3/SDL.h>
-#include <SDL3/SDL_syswm.h>
 #include <SDL3/SDL_vulkan.h>
 
 // SDL provides initialization code for several platforms in the form of redefining main(),
